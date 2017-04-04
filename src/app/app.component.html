@@ -1,12 +1,8 @@
 <div class="toolbar">
-
-</div>
-<div class="content">
-  <h1>
-    {{title}}
-  </h1>
-  <app-group *ngFor="let group of groups;trackBy: group?.title" [group]="group" [modal]="modal"></app-group>
-  <button class="fab" (click)="modal.show(button)" #button>+</button>
+  <a routerLink="/">Home</a>
+  <a routerLink="/about">About</a>
 </div>
 
-<app-image-modal #modal></app-image-modal>
+<div class="page">
+  <router-outlet></router-outlet>
+</div>

@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {GroupsService} from './groups.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +6,4 @@ import {GroupsService} from './groups.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  groups;
-  title = 'app works!';
-
-  constructor(groupsService: GroupsService) {
-    this.groups = groupsService.getAll();
-    console.log(this.groups);
-  }
 }

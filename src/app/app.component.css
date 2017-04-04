@@ -3,34 +3,3 @@
   height: 64px;
   flex: 1;
 }
-
-.content {
-  padding: 8px;
-}
-
-.fab {
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  border-radius: 50%;
-
-  user-select: none;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  background-color: #F44336;
-  color: white;
-  font-size: 18pt;
-
-  transition: .2s background-color ease;
-}
-
-.fab:hover {
-  background-color: #E53935;
-}
-
-.fab:active {
-  background-color: #B71C1C;
-}
