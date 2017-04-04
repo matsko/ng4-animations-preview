@@ -1,0 +1,25 @@
+.content {
+  flex-direction: row;
+  flex: 1;
+  display: flex;
+  height: 128px;
+}
+
+.upload-area {
+  width: 20%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 32pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .3s background ease;
+
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.upload-area:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

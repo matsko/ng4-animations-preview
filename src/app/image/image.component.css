@@ -1,0 +1,13 @@
+:host {
+  height: 100%;
+  display: flex;
+  width: 20%;
+  margin-right: 8px;
+}
+
+div {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
+

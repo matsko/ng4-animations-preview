@@ -1,19 +1,17 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {GroupsService} from './groups.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: [`
-    card { 
-      display:inline-block;
-      width:200px;
-      height:300px;
-      border:10px solid black;
-    }
-  `]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  groups;
   title = 'app works!';
 
-  public timing = '500ms ease-out';
+  constructor(groupsService: GroupsService) {
+    this.groups = groupsService.getAll();
+    console.log(this.groups);
+  }
 }

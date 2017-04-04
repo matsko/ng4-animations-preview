@@ -1,0 +1,9 @@
+<p>
+  {{group.title}}
+</p>
+<div class="content">
+  <app-image *ngFor="let image of group.images" [source]="image"></app-image>
+  <div class="upload-area" (click)="modal.show($event.target)">
+    <span>+</span>
+  </div>
+</div>
