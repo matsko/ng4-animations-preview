@@ -1,3 +1,10 @@
-<h1>
-  {{title}}
-</h1>
+<input [(ngModel)]="timing" type="text" />
+<hr />
+<card #card (click)="card.toggle()" [timing]="timing">
+  <div class="front">
+    hello
+  </div>
+  <div class="back">
+    there
+  </div>
+</card>
