@@ -14,6 +14,10 @@
   border-radius: 50%;
 }
 
+img {
+  border: solid 2px rgba(255, 255, 255, 0.1);
+}
+
 .matsko img {
   border: solid 3px rgba(255, 255, 255, 0.3);
 }
@@ -21,7 +25,7 @@
 .name {
   padding-top:10px;
   font-size: 20pt;
-  color: #fff7cd;
+  color: #fffef6;
 }
 
 .title {
