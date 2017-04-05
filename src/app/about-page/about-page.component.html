@@ -1,3 +1,17 @@
-<p>
-  about-page works!
-</p>
+<div fxLayout="column" class="about" fxLayoutGap="25px" fxLayoutAlign="start center">
+
+  <div class="primary" fxLayout fxLayoutGap="25px">
+      <contributor
+          [info]="person"
+          *ngFor="let person of authors">
+      </contributor>
+  </div>
+
+  <div class="contributors" fxLayout fxLayoutGap="25px" fxLayoutAlign="center start">
+      <contributor
+          [info]="person"
+          *ngFor="let person of contributors">
+      </contributor>
+  </div>
+
+</div>

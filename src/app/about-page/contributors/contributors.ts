@@ -1,0 +1,37 @@
+export const CONTRIBUTORS = {
+  primary: [
+    {
+      name: "Miško Hevery",
+      title: "(Grand)Father of Angular",
+      avatar: "https://avatars1.githubusercontent.com/u/111951?v=3&s=200",
+      githubURL: "https://github.com/mhevery",
+    },
+    {
+      name: "Matias Niemelä",
+      title: "Master Wizard - Angular Animation",
+      avatar: "https://avatars3.githubusercontent.com/u/93018?v=3&s=200",
+      githubURL: "https://github.com/matsko",
+    }
+  ],
+  secondary: [
+    {
+      name: "Thomas Burleson",
+      title: "Foolish Apprentice",
+      avatar: "https://avatars3.githubusercontent.com/u/210413?v=3&s=150",
+      githubURL: "https://github.com/thomasburleson",
+    },
+    {
+      name: "Robert Messerlee",
+      title: "Developer Extraordinaire",
+      avatar: "https://avatars1.githubusercontent.com/u/571363?v=3&s=150",
+      githubURL: "https://github.com/robertmesserle",
+    },
+    {
+      name: "Elad Bezalel",
+      title: "Eager Fan",
+      avatar: "https://avatars0.githubusercontent.com/u/6004537?v=3&s=150",
+      githubURL: "https://github.com/EladBezalel",
+    }
+  ]
+}
+

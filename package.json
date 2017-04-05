@@ -16,6 +16,7 @@
     "@angular/common": "git://github.com/angular/common-builds.git#animations-preview",
     "@angular/compiler": "git://github.com/angular/compiler-builds.git#animations-preview",
     "@angular/core": "git://github.com/angular/core-builds.git#animations-preview",
+    "@angular/flex-layout": "^2.0.0-beta.7",
     "@angular/forms": "git://github.com/angular/forms-builds.git#animations-preview",
     "@angular/http": "git://github.com/angular/http-builds.git#animations-preview",
     "@angular/platform-browser": "git://github.com/angular/platform-browser-builds.git#animations-preview",
