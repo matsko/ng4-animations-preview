@@ -21,8 +21,8 @@ import {GroupsService} from "../groups.service";
           ])
         ])
       ]),
-      transition(':enter', [
-
+      transition(':leave', [
+        animate(2000, style({ fontSize: '1em' })),
       ])
     ])
   ]
