@@ -5,7 +5,7 @@ export class GroupsService {
   _groups = [
     {
       title: 'group 1',
-      images: ['../assets/conf1.jpg', '../assets/conf1.jpg']
+      images: ['../assets/conf1.jpg', '../assets/logo.svg']
     },
     {
       title: 'group 2',

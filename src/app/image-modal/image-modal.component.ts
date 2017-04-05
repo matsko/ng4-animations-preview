@@ -13,8 +13,8 @@ import {animate, group, query, style, transition, trigger, wait} from '@angular/
           style({opacity: 0, transform: 'translateX($x) translateY($y) scale(0)', transformOrigin: '$ox $oy'})
         ]),
         group([
-          animate(300, style({opacity: 1})),
-          query('.container', animate(200, style('*'))),
+          animate('100ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: 1})),
+          query('.container', animate('300ms cubic-bezier(0.35, 0, 0.25, 1)', style('*'))),
         ]),
       ], {x: '0px', y: '0px', ox: '50%', oy: '50%' }),
       transition(':leave', group([
@@ -35,20 +35,26 @@ export class ImageModalComponent implements OnInit {
     oy: null
   };
 
-  show(elem: any = null) {
-    this.data.value = 'active';
-    const rect = elem.getBoundingClientRect();
+  show(event: any) {
+    this._show();
+    const clientX = event.clientX;
+    const clientY = event.clientY;
     const window = document.body.getBoundingClientRect();
     const wh = window.width / 2;
     const hh = window.height / 2;
-    const x = rect.left - wh;
-    const y = rect.top - hh;
-    const ox = wh / x;
-    const oy = wh / y;
+    const x = clientX - wh;
+    const y = clientY - hh;
+    const ox = clientX / window.width;
+    const oy = clientY / window.height;
     this.data.x = `${x}px`;
     this.data.y = `${y}px`;
-    this.data.ox = `${ox}px`;
-    this.data.oy = `${oy}px`;
+    this.data.ox = `${ox * 100}%`;
+    this.data.oy = `${oy * 100}%`;
+    console.log(this.data);
+  }
+
+  private _show() {
+    this.data.value = 'active';
   }
 
   hide() {
@@ -56,7 +62,7 @@ export class ImageModalComponent implements OnInit {
   }
 
   toggle() {
-    this.data.value === 'active' ? this.hide() : this.show();
+    this.data.value === 'active' ? this.hide() : this._show();
   }
 
   constructor() {

@@ -16,6 +16,8 @@ import {IndexPageComponent} from './index-page/index-page.component';
 import {AboutPageComponent} from './about-page/about-page.component';
 import {ContributorComponent} from './about-page/contributors/contributor.component';
 import {APP_ROUTES} from "./routes";
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
+import {PreviewBusService} from "./preview-bus.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {APP_ROUTES} from "./routes";
     ImageModalComponent,
     IndexPageComponent,
     AboutPageComponent,
-    ContributorComponent
+    ContributorComponent,
+    ImagePreviewComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,7 @@ import {APP_ROUTES} from "./routes";
     FlexLayoutModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [GroupsService],
+  providers: [GroupsService, PreviewBusService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,17 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.css']
 })
-export class GroupComponent implements OnInit {
+export class GroupComponent {
   @Input() group;
   @Input() modal;
 
+  selectedImage = null;
+
   constructor() { }
 
-  ngOnInit() {
+  selectImage(image: any) {
+    this.selectedImage = image === this.selectedImage ? null : image;
   }
-
 }

@@ -1,0 +1,32 @@
+:host {
+  background:black;
+  position:relative;
+  height:400px;
+  overflow:hidden;
+  display:block;
+}
+
+.image-container {
+  padding:0 100px;
+  display:table;
+  width:100%;
+}
+
+.image-preview {
+  display:table-cell;
+  vertical-align:top;
+  width:40%;
+  padding-top:50px;
+}
+
+.image-preview img {
+  border:5px solid white;
+  width:100%;
+}
+
+.image-info {
+  width:60%;
+  padding:50px 0 0 50px;
+  display:table-cell;
+  vertical-align:top;
+}

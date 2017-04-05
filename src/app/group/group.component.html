@@ -2,8 +2,9 @@
   {{group.title}}
 </p>
 <div class="content">
-  <app-image *ngFor="let image of group.images" [source]="image"></app-image>
-  <div class="upload-area" (click)="modal.show($event.target)">
+  <app-image *ngFor="let image of group.images" [source]="image" (click)="selectImage(image)"></app-image>
+  <div class="upload-area" (click)="modal.show($event)">
     <span>+</span>
   </div>
 </div>
+<app-image-preview *ngIf="selectedImage" (close)="selectImage(null)" [image]="selectedImage"></app-image-preview>
