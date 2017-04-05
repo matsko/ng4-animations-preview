@@ -2,8 +2,9 @@ export const CONTRIBUTORS = {
   primary: [
     {
       name: "Matias Niemelä",
+      style: 'matsko',
       title: "Master Wizard - Angular Animation",
-      avatar: "https://avatars3.githubusercontent.com/u/93018?v=3&s=200",
+      avatar: "https://avatars3.githubusercontent.com/u/93018?v=3&s=250",
       githubURL: "https://github.com/matsko",
     },
     {
@@ -21,6 +22,12 @@ export const CONTRIBUTORS = {
   ],
   secondary: [
     {
+      name: "Ward Bell",
+      title: "DocFather of Angular",
+      avatar: "https://avatars2.githubusercontent.com/u/129061?v=3&s=200",
+      githubURL: "https://github.com/wardbell"
+    },
+    {
       name: "Robert Messerlee",
       title: "Developer Extraordinaire",
       avatar: "https://avatars1.githubusercontent.com/u/571363?v=3&s=200",
@@ -31,12 +38,6 @@ export const CONTRIBUTORS = {
       title: "Eager Fan",
       avatar: "https://avatars0.githubusercontent.com/u/6004537?v=3&s=200",
       githubURL: "https://github.com/EladBezalel",
-    },
-    {
-      name: "Ward Bell",
-      title: "Father of Angular Docs",
-      avatar: "https://avatars0.githubusercontent.com/u/129061?v=3&s=200",
-      githubURL: "https://github.com/wardbell"
     }
   ]
 }
