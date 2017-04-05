@@ -81,16 +81,27 @@ button {
 }
 
 .toolbar a {
-  font-size:1.1rem;
+  font-size:.9rem;
   letter-spacing:2px;
   text-transform:uppercase;
-  padding:0px 16px;
+  padding:0px 24px;
   color:white!important;
   line-height:64px;
+  color:#ddd!important;
+}
+
+.toolbar a:hover {
+  color:#fff!important;
+}
+
+.toolbar a img {
+  height:25px;
+  margin-top:-3px;
+  vertical-align:middle;
 }
 
 .toolbar a + a {
-  border-left:1px solid white;
+  border-left:1px solid #ddd;
 }
 
 .fab {
