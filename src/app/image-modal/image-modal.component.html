@@ -1,7 +1,29 @@
-<div class="overlay" *ngIf="data.value === 'active'" (click)="hide()" [@overlay]="data">
-  <div class="container" (click)="$event.stopPropagation()">
-    <div class="header">1</div>
-    <div class="content">2</div>
-    <div class="footer">3</div>
-  </div>
+<div class="overlay" *ngIf="data.value === 'active'" (click)="hide()" [@overlay]="data"
+     fxFlex fxLayoutAlign="center center">
+  <card class="container">
+    <form class="front" (click)="$event.stopPropagation()" #form="ngForm" ngNativeValidate
+          (submit)="save(form.value)" fxFlex fxLayout="column">
+      <div class="header">
+        <button>info</button>
+      </div>
+      <div class="content" fxLayout="column" fxFlex>
+        <select name="group" [(ngModel)]="_selectedGroup">
+          <option *ngFor="let group of groups.getAll()" [value]="group.title">{{group.title}}</option>
+          <option value="_newGroup">New group</option>
+        </select>
+
+        <input name="newGroup" *ngIf="_selectedGroup === '_newGroup'" ngModel required>
+
+        <input type="file" name="image" ngModel (change)="onFileChange($event)" required/>
+      </div>
+      <div class="actions" fxLayout="row" fxLayoutAlign="end">
+        <button type="button" (click)="hide()">Cancel</button>
+        <button>Save</button>
+      </div>
+    </form>
+    <div class="back">
+      hey
+      <app-loader></app-loader>
+    </div>
+  </card>
 </div>

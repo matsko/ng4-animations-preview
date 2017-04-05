@@ -15,9 +15,11 @@ import {ImageModalComponent} from './image-modal/image-modal.component';
 import {IndexPageComponent} from './index-page/index-page.component';
 import {AboutPageComponent} from './about-page/about-page.component';
 import {ContributorComponent} from './about-page/contributors/contributor.component';
-import {APP_ROUTES} from "./routes";
+import {APP_ROUTES} from './routes';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import {PreviewBusService} from "./preview-bus.service";
+import {CardComponent} from './card';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {PreviewBusService} from "./preview-bus.service";
     IndexPageComponent,
     AboutPageComponent,
     ContributorComponent,
-    ImagePreviewComponent
+    LoaderComponent,
+    ImagePreviewComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

@@ -16,4 +16,17 @@ export class GroupsService {
   getAll() {
     return this._groups;
   }
+
+  add(group) {
+    this._groups.push(group);
+  }
+
+  addImage(title, image) {
+    const group = this._groups.find(grp => grp.title === title);
+    if (!group) {
+      return this.add({title, images: [image]});
+    }
+
+    group.images.push(image);
+  }
 }

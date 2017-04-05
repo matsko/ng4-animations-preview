@@ -11,6 +11,5 @@ export class IndexPageComponent {
 
   constructor(groupsService: GroupsService) {
     this.groups = groupsService.getAll();
-    console.log(this.groups);
   }
 }

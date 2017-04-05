@@ -1,21 +1,23 @@
-import {Component, HostBinding, Input} from '@angular/core';
+import {Component, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'card',
   template: `
-    <div class="container">
-      <div class="front">
+    <div class="wrapper" [@flip]="data">
+      <div class="front" *ngIf="data.value === 'front'">
         <ng-content select=".front"></ng-content> 
       </div>
-      <div class="back">
+      <div class="back" *ngIf="data.value === 'back'">
         <ng-content select=".back"></ng-content> 
       </div>
     </div>
   `,
   styles: [`
     :host { perspective: '1000px'; }
-    .container {
+    .wrapper {
+      width: 100%;
+      height: 100%;
       transform-style: preserve-3d;
       position: relative;
     }
@@ -24,6 +26,8 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
     	position: absolute;
 	    top: 0;
 	    left: 0;
+      display: flex;
+      flex-direction: column;
     }
     .front {
       z-index: 2;
@@ -48,16 +52,15 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ]
 })
 export class CardComponent {
-  @HostBinding('@flip')
   public data = { value: 'front', time: null };
-  
+
   @Input('timing')
   public timing: string;
 
-  public toggle(time = null) {
+  public toggle() {
     this.data = {
-      value: this.data.value == 'front' ? 'back' : 'front',
-      time: this.timing
+      value: this.data.value === 'front' ? 'back' : 'front',
+      time: this.timing || '1000ms'
     };
   }
 }

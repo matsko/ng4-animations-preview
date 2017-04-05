@@ -10,3 +10,12 @@ body {
   color: white;
   font-family: Roboto, serif;
 }
+
+button {
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  padding: 8px;
+  margin: 0 8px;
+}

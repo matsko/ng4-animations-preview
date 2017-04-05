@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {animate, group, query, style, transition, trigger, wait} from '@angular/animations';
+import {GroupsService} from '../groups.service';
+
+import {CardComponent} from '../card';
+import {LoaderComponent} from '../loader/loader.component';
 
 @Component({
   selector: 'app-image-modal',
@@ -16,15 +20,16 @@ import {animate, group, query, style, transition, trigger, wait} from '@angular/
           animate('100ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: 1})),
           query('.container', animate('300ms cubic-bezier(0.35, 0, 0.25, 1)', style('*'))),
         ]),
-      ], {x: '0px', y: '0px', ox: '50%', oy: '50%' }),
+      ], {x: '0px', y: '0px', ox: '50%', oy: '50%'}),
       transition(':leave', group([
         animate(300, style({opacity: 0})),
         query('.container', [
           animate(300, style({opacity: 0, transform: 'translateX($x) translateY($y) scale(0)'}))
         ])
-      ]), {x: '0px', y: '0px', ox: '50%', oy: '50%' })
+      ]), {x: '0px', y: '0px', ox: '50%', oy: '50%'})
     ])
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class ImageModalComponent implements OnInit {
   data = {
@@ -35,10 +40,22 @@ export class ImageModalComponent implements OnInit {
     oy: null
   };
 
-  show(event: any) {
+  _selectedGroup = '_newGroup';
+
+  file;
+
+  @ViewChild(CardComponent)
+  public card;
+
+  @ViewChild(LoaderComponent)
+  public loader;
+
+  show(event: any, group: any) {
     this._show();
     const clientX = event.clientX;
     const clientY = event.clientY;
+
+    this._selectedGroup = '_newGroup';
     const window = document.body.getBoundingClientRect();
     const wh = window.width / 2;
     const hh = window.height / 2;
@@ -50,7 +67,11 @@ export class ImageModalComponent implements OnInit {
     this.data.y = `${y}px`;
     this.data.ox = `${ox * 100}%`;
     this.data.oy = `${oy * 100}%`;
-    console.log(this.data);
+
+    if (group) {
+      const all = this.groups.getAll();
+      this._selectedGroup = all[all.indexOf(group)].title;
+    }
   }
 
   private _show() {
@@ -65,7 +86,32 @@ export class ImageModalComponent implements OnInit {
     this.data.value === 'active' ? this.hide() : this._show();
   }
 
-  constructor() {
+  // uploadDone() {
+  //   this.groups.addImage(form.newGroup || form.group, result);
+  // }
+
+  save(form) {
+    this.card.toggle();
+
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.loader.upload(e.target.result);
+    };
+    reader.readAsDataURL(this.file);
+
+    this.loader.asObservable.subscribe((result) => {
+      this.groups.addImage(form.newGroup || form.group, result);
+
+      this.hide();
+    });
+  }
+
+  onFileChange(event) {
+    this.file = event.target.files[0];
+  }
+
+  constructor(public groups: GroupsService) {
   }
 
   ngOnInit() {

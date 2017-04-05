@@ -9,11 +9,6 @@
   right: 16px;
   bottom: 16px;
   border-radius: 50%;
-
-  user-select: none;
-  outline: none;
-  cursor: pointer;
-  border: 0;
   background-color: #F44336;
   color: white;
   font-size: 18pt;
