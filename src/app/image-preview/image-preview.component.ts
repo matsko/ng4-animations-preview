@@ -1,15 +1,6 @@
-import {HostBinding, Component, Input, Output, Host, EventEmitter} from '@angular/core';
-import {trigger, query, animate, style, transition, animation, animateChild, group, queryAll, stagger, wait} from '@angular/animations';
+import {HostBinding, Component, Input, Output, EventEmitter} from '@angular/core';
+import {trigger, query, animate, style, transition, animateChild, group, queryAll, stagger, wait} from '@angular/animations';
 import {PreviewBusService} from "../preview-bus.service";
-import {GroupComponent} from "../group/group.component";
-
-const setX = animation([
-  style({ left: '$value', position: 'absolute' })
-], { value: '0px' });
-
-const slideX = animation([
-  animate(1000, style({ left: '$value' }))
-], { value: '100px' });
 
 @Component({
   selector: 'app-image-preview',
@@ -79,7 +70,7 @@ export class ImagePreviewComponent {
       this._previewService.notifyOpen(this);
     }
   }
-  
+
   @HostBinding('@preview')
   public count: number = 0;
 
