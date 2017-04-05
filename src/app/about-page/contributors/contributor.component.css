@@ -1,6 +1,6 @@
 :host {
   width: 330px;
-  margin-top: 64px;
+  margin-top: 54px;
 }
 
 .contributor {
@@ -19,11 +19,13 @@
 }
 
 .name {
-  font-size: 26pt;
+  padding-top:10px;
+  font-size: 20pt;
+  color: #fff7cd;
 }
 
 .title {
-  font-size: 16pt;
+  font-size: 14pt;
 }
 
 .title a {

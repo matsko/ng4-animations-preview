@@ -1,14 +1,14 @@
-<div fxLayout="column" class="about" fxLayoutGap="25px" fxLayoutAlign="center center"
+<div fxLayout="column" class="about" fxLayoutAlign="center center"
      fxFlex>
 
-  <div class="primary" fxLayout fxLayoutGap="25px" fxLayoutAlign="center center">
+  <div class="primary" fxLayout fxLayoutGap="15px" fxLayoutAlign="center center">
       <contributor
           [info]="person"
           *ngFor="let person of authors">
       </contributor>
   </div>
 
-  <div class="contributors" fxLayout="row" fxLayoutGap="25px"  fxLayoutAlign="start center">
+  <div class="contributors" fxLayout="row" fxLayoutGap="15px"  fxLayoutAlign="start center">
       <contributor
           [info]="person"
           *ngFor="let person of contributors">
