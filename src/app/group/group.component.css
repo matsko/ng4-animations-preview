@@ -1,8 +1,25 @@
+:host {
+  margin:1rem 0 2rem;
+  display:block;
+}
+
+.title {
+  padding:0 20px;
+}
+
+.title h2 {
+  text-transform: uppercase;
+  letter-spacing:2px;
+  font-size:1.2rem;
+}
+
 .content {
   flex-direction: row;
   flex: 1;
   display: flex;
   height: 128px;
+  padding:0 20px;
+  margin-bottom:1rem;
 }
 
 .upload-area {

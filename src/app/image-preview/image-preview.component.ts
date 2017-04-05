@@ -1,6 +1,7 @@
-import {HostBinding, Component, Input, Output, EventEmitter} from '@angular/core';
+import {HostBinding, Component, Input, Output, Host, EventEmitter} from '@angular/core';
 import {trigger, query, animate, style, transition, animation, animateChild, group, queryAll, stagger, wait} from '@angular/animations';
 import {PreviewBusService} from "../preview-bus.service";
+import {GroupComponent} from "../group/group.component";
 
 const setX = animation([
   style({ left: '$value', position: 'absolute' })
@@ -78,7 +79,7 @@ export class ImagePreviewComponent {
       this._previewService.notifyOpen(this);
     }
   }
-
+  
   @HostBinding('@preview')
   public count: number = 0;
 

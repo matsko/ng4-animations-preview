@@ -1,5 +1,6 @@
 :host {
-  background:black;
+  background:#ECF6FF;
+  color:black;
   position:relative;
   height:400px;
   overflow:hidden;
@@ -7,7 +8,7 @@
 }
 
 .image-container {
-  padding:0 100px;
+  padding:50px;
   display:table;
   width:100%;
 }
@@ -15,18 +16,25 @@
 .image-preview {
   display:table-cell;
   vertical-align:top;
-  width:40%;
-  padding-top:50px;
+  text-align:right;
+  width:30%;
 }
 
 .image-preview img {
   border:5px solid white;
-  width:100%;
+  height:300px;
 }
 
 .image-info {
-  width:60%;
-  padding:50px 0 0 50px;
+  font-size:1.5rem;
+  width:70%;
+  padding-right:50px;
   display:table-cell;
-  vertical-align:top;
+  vertical-align:middle;
+}
+
+app-image {
+  display:block;
+  width:100%;
+  height:300px;
 }

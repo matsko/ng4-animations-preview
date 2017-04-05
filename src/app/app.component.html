@@ -1,8 +1,11 @@
 <div class="toolbar">
   <a routerLink="/">Home</a>
   <a routerLink="/about">About</a>
+  <button class="fab" (click)="modal.show($event)" #button>+</button>
 </div>
 
-<div class="page">
-  <router-outlet></router-outlet>
+<div class="page" [@routerAnimations]="prepareRouteTransition(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
 </div>
+
+<app-image-modal #modal></app-image-modal>

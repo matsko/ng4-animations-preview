@@ -1,0 +1,13 @@
+.loading-stage {
+}
+
+.loading-bar {
+  height:52px;
+  color:white;
+  padding:0px 8px;
+  line-height:52px;
+  font-size:1.5rem;
+  text-align:right;
+  background:#009688;
+  transition:0.5s width cubic-bezier(.35, 0, .25, 1);
+}

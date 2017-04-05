@@ -4,6 +4,7 @@ import {GroupsService} from '../groups.service';
 
 import {CardComponent} from '../card';
 import {LoaderComponent} from '../loader/loader.component';
+import {PreviewBusService} from "../preview-bus.service";
 
 @Component({
   selector: 'app-image-modal',
@@ -31,7 +32,7 @@ import {LoaderComponent} from '../loader/loader.component';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class ImageModalComponent implements OnInit {
+export class ImageModalComponent {
   data = {
     value: 'inactive',
     x: null,
@@ -49,6 +50,9 @@ export class ImageModalComponent implements OnInit {
 
   @ViewChild(LoaderComponent)
   public loader;
+
+  constructor(public groups: GroupsService, private _preview: PreviewBusService) {
+  }
 
   show(event: any, group: any) {
     this._show();
@@ -86,10 +90,6 @@ export class ImageModalComponent implements OnInit {
     this.data.value === 'active' ? this.hide() : this._show();
   }
 
-  // uploadDone() {
-  //   this.groups.addImage(form.newGroup || form.group, result);
-  // }
-
   save(form) {
     this.card.toggle();
 
@@ -101,20 +101,14 @@ export class ImageModalComponent implements OnInit {
     reader.readAsDataURL(this.file);
 
     this.loader.asObservable.subscribe((result) => {
-      this.groups.addImage(form.newGroup || form.group, result);
+      const id = this.groups.addImage(form.newGroup || form.group, result);
 
       this.hide();
+      this._preview.openImageById(id);
     });
   }
 
   onFileChange(event) {
     this.file = event.target.files[0];
   }
-
-  constructor(public groups: GroupsService) {
-  }
-
-  ngOnInit() {
-  }
-
 }

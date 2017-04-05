@@ -1,5 +1,5 @@
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -8,8 +8,8 @@
 }
 
 .container {
-  width: 70%;
-  height: 80%;
+  width: 60%;
+  height: 70%;
   border-radius: 3px;
   color: #212121;
 }
@@ -21,9 +21,16 @@
   right: 0;
   background: white;
 
-  padding: 8px;
+  padding: 15px 30px;
+
+  border-radius:3px;
 }
 
-.actions {
-  padding: 16px;
+.back {
+  background:#aaa;
+}
+
+.title h2 {
+  text-transform:uppercase;
+  letter-spacing:2px;
 }

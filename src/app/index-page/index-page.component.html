@@ -1,6 +1,3 @@
 <div class="content">
-  <app-group *ngFor="let group of groups;trackBy: group?.title" [group]="group" [modal]="modal"></app-group>
-  <button class="fab" (click)="modal.show($event)" #button>+</button>
+  <app-group class="group" *ngFor="let group of groups;trackBy: group?.title" [group]="group"></app-group>
 </div>
-
-<app-image-modal #modal></app-image-modal>

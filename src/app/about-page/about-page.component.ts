@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CONTRIBUTORS} from './contributors/contributors';
 
 @Component({
@@ -6,14 +6,10 @@ import {CONTRIBUTORS} from './contributors/contributors';
   templateUrl: './about-page.component.html',
   styleUrls: ['./about-page.component.css']
 })
-export class AboutPageComponent implements OnInit {
+export class AboutPageComponent {
   authors = CONTRIBUTORS.primary;
   contributors = CONTRIBUTORS.secondary;
 
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

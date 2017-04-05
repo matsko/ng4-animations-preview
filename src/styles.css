@@ -1,14 +1,33 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
-
 *, *:before, *:after {
   box-sizing:border-box;
 }
 
+a, a:link, a:visited, a:active {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('proximanova-regular-webfont.woff2') format('woff2'),
+  url('proximanova-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body, select, option, input, code, pre {
+  font-size:1rem;
+  font-family:ProximaNova;
+}
+
+html {
+  font-size:16px;
+}
+
 body {
   margin: 0;
-  background: #212121;
+  background: #181818;
   color: white;
-  font-family: Roboto, serif;
+  padding-bottom:100px;
 }
 
 button {
@@ -17,5 +36,126 @@ button {
   cursor: pointer;
   border: 0;
   padding: 8px;
-  margin: 0 8px;
+}
+
+.arrow {
+  width:200px;
+  height:100px;
+  background:maroon;
+  position:relative;
+  border:2px solid white;
+}
+
+.arrow:after {
+  content:"";
+  border:10px solid transparent;;
+  border-top-color:maroon;
+  position:absolute;
+  left:50%;
+  bottom:0;
+  margin-left:-10px;
+  margin-bottom:-20px;
+}
+.arrow:before {
+  content:"";
+  border:10px solid transparent;;
+  border-top-color:white;
+  position:absolute;
+  left:50%;
+  bottom:0;
+  margin-left:-10px;
+  margin-bottom:-22px;
+}
+
+.toolbar {
+  z-index:100;
+  position:fixed;
+  background: #121212;
+  box-shadow: 0 0 50px black;
+  height: 64px;
+  padding: 0px 8px;
+  bottom:0;
+  left:0;
+  right:0;
+  flex: 1;
+}
+
+.toolbar a {
+  font-size:1.1rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:0px 16px;
+  color:white!important;
+  line-height:64px;
+}
+
+.toolbar a + a {
+  border-left:1px solid white;
+}
+
+.fab {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  right: 16px;
+  top: -24px;
+  border-radius: 50%;
+  background-color: #F44336;
+  color: white;
+  font-size: 18pt;
+
+  transition:0.3s cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.fab:hover {
+  transform:scale(1.1);
+  background-color: #E53935;
+}
+
+.fab:active {
+  background-color: #B71C1C;
+}
+
+select, input[type="file"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius:0;
+}
+
+.actions {
+  padding:1rem 0;
+}
+
+.field, .field-action {
+  background:#fff;
+  font-size:1.2rem;
+  padding:5px;
+}
+
+.field {
+  cursor:text;
+  border:1px solid #aaa;
+  width:100%;
+}
+
+.field-group {
+  padding:1rem 0;
+}
+
+.field-group label {
+  font-size:1.2rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  display:block;
+}
+
+.actions {
+  margin-top:1rem;
+}
+.actions .main {
+  padding:1rem;
+  background:#3e8acd;
+  color:white;
 }

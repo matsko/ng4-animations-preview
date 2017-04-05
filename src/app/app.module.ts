@@ -20,6 +20,7 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import {PreviewBusService} from "./preview-bus.service";
 import {CardComponent} from './card';
 import { LoaderComponent } from './loader/loader.component';
+import {ModalServiceService} from "./modal-service.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { LoaderComponent } from './loader/loader.component';
     ContributorComponent,
     LoaderComponent,
     ImagePreviewComponent,
-    CardComponent
+    CardComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +43,7 @@ import { LoaderComponent } from './loader/loader.component';
     FlexLayoutModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [GroupsService, PreviewBusService],
+  providers: [GroupsService, PreviewBusService, ModalServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

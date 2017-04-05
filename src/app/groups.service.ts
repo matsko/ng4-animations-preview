@@ -1,17 +1,9 @@
 import {Injectable} from '@angular/core';
+import {GROUPS} from './groups.data';
 
 @Injectable()
 export class GroupsService {
-  _groups = [
-    {
-      title: 'group 1',
-      images: ['../assets/conf1.jpg', '../assets/logo.svg']
-    },
-    {
-      title: 'group 2',
-      images: ['../assets/conf1.jpg']
-    }
-  ];
+  private _groups = [].concat(GROUPS);
 
   getAll() {
     return this._groups;
@@ -21,12 +13,19 @@ export class GroupsService {
     this._groups.push(group);
   }
 
-  addImage(title, image) {
-    const group = this._groups.find(grp => grp.title === title);
+  addImage(title, image): number {
+    let group = this._groups.find(grp => grp.title === title);
     if (!group) {
-      return this.add({title, images: [image]});
+      group = {title, images: []};
+      this.add(group);
     }
 
-    group.images.push(image);
+    const id = timestamp();
+    group.images.push({url:image, id});
+    return id;
   }
+}
+
+function timestamp() {
+  return Date.now();
 }

@@ -6,6 +6,6 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent {
-  @Input() source;
+  @Input('image') image = {};
   constructor() { }
 }
