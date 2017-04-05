@@ -5,6 +5,11 @@ import {GroupsService} from '../groups.service';
 import {CardComponent} from '../card';
 import {LoaderComponent} from '../loader/loader.component';
 import {PreviewBusService} from "../preview-bus.service";
+import {Subscription} from 'rxjs';
+
+const zoomFadeIn = {opacity: 0, transform: 'translateX($x) translateY($y) scale(0)'};
+const zoomFadeInFrom = {...zoomFadeIn, transformOrigin: '$ox $oy'};
+const easeInFor = (duration) => `${duration}ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
 @Component({
   selector: 'app-image-modal',
@@ -14,18 +19,16 @@ import {PreviewBusService} from "../preview-bus.service";
     trigger('overlay', [
       transition(':enter', [
         style({opacity: 0}),
-        query('.container', [
-          style({opacity: 0, transform: 'translateX($x) translateY($y) scale(0)', transformOrigin: '$ox $oy'})
-        ]),
+        query('.container', [ style(zoomFadeInFrom) ]),
         group([
-          animate('100ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: 1})),
-          query('.container', animate('300ms cubic-bezier(0.35, 0, 0.25, 1)', style('*'))),
+          animate(easeInFor(100), style({opacity: 1})),
+          query('.container', animate(easeInFor(300), style('*'))),
         ]),
       ], {x: '0px', y: '0px', ox: '50%', oy: '50%'}),
       transition(':leave', group([
         animate(300, style({opacity: 0})),
         query('.container', [
-          animate(300, style({opacity: 0, transform: 'translateX($x) translateY($y) scale(0)'}))
+          animate(300, style(zoomFadeIn))
         ])
       ]), {x: '0px', y: '0px', ox: '50%', oy: '50%'})
     ])
@@ -33,33 +36,36 @@ import {PreviewBusService} from "../preview-bus.service";
   encapsulation: ViewEncapsulation.None
 })
 export class ImageModalComponent {
-  data = {
-    value: 'inactive',
-    x: null,
-    y: null,
-    ox: null,
-    oy: null
-  };
-
-  _selectedGroup = '_newGroup';
-
-  file;
-
   @ViewChild(CardComponent)
   public card;
 
   @ViewChild(LoaderComponent)
   public loader;
 
-  constructor(public groups: GroupsService, private _preview: PreviewBusService) {
+  constructor(public groups: GroupsService, private _preview: PreviewBusService) { }
+
+
+  /**
+   * This component initializes with hidden DOM
+   */
+  show(event: any, group: any) {
+    this.calculateZoomOrigin(event);
+    this.makeVisible();
+
+    this._selectedGroup = '_newGroup';
+    if (group) {
+      const all = this.groups.getAll();
+      this._selectedGroup = all[all.indexOf(group)].title;
+    }
   }
 
-  show(event: any, group: any) {
-    this._show();
+  /**
+   * Calculate origin used in the `zoomFadeInFrom()`
+   */
+  private calculateZoomOrigin(event) {
     const clientX = event.clientX;
     const clientY = event.clientY;
 
-    this._selectedGroup = '_newGroup';
     const window = document.body.getBoundingClientRect();
     const wh = window.width / 2;
     const hh = window.height / 2;
@@ -67,18 +73,14 @@ export class ImageModalComponent {
     const y = clientY - hh;
     const ox = clientX / window.width;
     const oy = clientY / window.height;
+
     this.data.x = `${x}px`;
     this.data.y = `${y}px`;
     this.data.ox = `${ox * 100}%`;
     this.data.oy = `${oy * 100}%`;
-
-    if (group) {
-      const all = this.groups.getAll();
-      this._selectedGroup = all[all.indexOf(group)].title;
-    }
   }
 
-  private _show() {
+  private makeVisible() {
     this.data.value = 'active';
   }
 
@@ -87,28 +89,50 @@ export class ImageModalComponent {
   }
 
   toggle() {
-    this.data.value === 'active' ? this.hide() : this._show();
+    this.data.value === 'active' ? this.hide() : this.makeVisible();
   }
 
+  /**
+   * When a file is selected (to upload), flip the card
+   * to show the upload status view. And while simulating an
+   * image upload, show a progress bar (in the upload status view).
+   *
+   * When upload finishes, hide this ImageModalComponent view
+   * and select/show the uploaded image in the Image group.
+   */
   save(form) {
+    let subscription:Subscription;
+    let showUploadedImage = (result) => {
+      const id = this.groups.addImage(form.newGroup || form.group, result);
+      this.hide();
+      this._preview.openImageById(id);
+      subscription.unsubscribe();
+    };
+
     this.card.toggle();
+    subscription = this.loader.asObservable.subscribe(showUploadedImage);
 
     const reader = new FileReader();
-
     reader.onload = (e: any) => {
       this.loader.upload(e.target.result);
     };
     reader.readAsDataURL(this.file);
-
-    this.loader.asObservable.subscribe((result) => {
-      const id = this.groups.addImage(form.newGroup || form.group, result);
-
-      this.hide();
-      this._preview.openImageById(id);
-    });
   }
 
   onFileChange(event) {
     this.file = event.target.files[0];
   }
+
+
+  _selectedGroup = '_newGroup';
+  file;
+  data = {
+    value: 'inactive',
+    x: null,
+    y: null,
+    ox: null,
+    oy: null
+  };
+
+
 }
