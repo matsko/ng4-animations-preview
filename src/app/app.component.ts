@@ -9,40 +9,57 @@ import {trigger, animate, wait, style, group, query, animateChild, queryAll, sta
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('routerAnimations', [
-      transition(':enter, :leave', []),
-      transition('home => about', [
+      transition('about => home', [
         group([
-            queryAll('app-index-page, app-about-page', [
-              style({ position: 'absolute', top: 0, left: 0, right: 0 })
-            ]),
-            query('app-about-page', [
-              style({ opacity:0, transform: 'translateX(100%)'})
-            ]),
-          queryAll('app-about-page contributor', [
-            style({ opacity:0, transform: 'scale(0)'})
+          queryAll(':enter, :leave', [
+            style({ position: 'absolute', top: 0, left: 0, right: 0 })
           ]),
+          query(':leave', style({ zIndex: 100 })),
+          query(':enter', style({ transform: 'translateY(100%)' }))
         ]),
         group([
-          query('app-index-page', [
-            queryAll('app-index-page .image', [
-              stagger(50, [
-                animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translateY(-50px)' }))
-              ])
-            ]),
-            animate('800ms cubic-bezier(.35,0,.25,1)', style({ opacity:0, transform: 'translateX(-100%)' }))
+          query(':leave', group([
+            animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translateY(-100%)' })),
+            animateChild()
+          ])),
+          query(':enter', group([
+            animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translateY(0%)' })),
+            animateChild()
+          ]))
+        ])
+      ]),
+      transition('home => about', [
+        group([
+          queryAll(':enter, :leave', [
+            style({ position: 'absolute', top: 0, left: 0, right: 0 })
           ]),
-          wait(1500, group([
-              query('app-about-page', [
-                animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
-              ]),
-            wait(500,[
-            queryAll('app-about-page contributor', [
-              stagger(200, [
-                animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
-                ])
-              ])
+          query(':enter', [
+            style({ opacity:0, transform: 'translateX(100%)'}),
+            queryAll('contributor', [
+              style({ opacity:0, transform: 'scale(0)'})
             ])
-            ]))
+          ])
+        ]),
+
+        query(':leave', [
+          query('@image', animateChild()),
+          queryAll('.image', [
+            stagger(50, [
+              animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translateY(-50px)' }))
+            ])
+          ]),
+          animate('800ms cubic-bezier(.35,0,.25,1)', style({ opacity:0, transform: 'translateX(-100%)' }))
+        ]),
+
+        group([
+          query(':enter', [
+            animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
+          ]),
+          queryAll(':enter contributor', [
+            stagger(200, [
+              animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
+            ])
+          ])
         ])
       ])
     ])
@@ -59,12 +76,7 @@ export class AppComponent {
   }
 
   prepareRouteTransition(outlet) {
-    let routeData: any;
-    try {
-      routeData = outlet['_activatedRoute'].snapshot.routeConfig['animation'];
-    } catch(e) {
-      return '';
-    }
-    return routeData.value;
+    const animationData = outlet.activeRouteData['animation'];
+    return animationData ? animationData['value'] : null;
   }
 }
