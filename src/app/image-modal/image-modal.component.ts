@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {animate, group, query, style, transition, trigger, wait} from '@angular/animations';
+import {animate, group, query, style, transition, trigger} from '@angular/animations';
 import {GroupsService} from '../groups.service';
 
 import {CardComponent} from '../card';

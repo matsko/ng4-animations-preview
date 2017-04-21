@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ModalServiceService} from "./modal-service.service";
-import {trigger, animate, wait, style, group, query, animateChild, queryAll, stagger, transition} from '@angular/animations';
+import {trigger, animate, style, group, query, animateChild, queryAll, stagger, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ import {trigger, animate, wait, style, group, query, animateChild, queryAll, sta
         ]),
         group([
           query(':leave', group([
-            animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translateY(-100%)' })),
+            animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translateY(-100%)' })), // y: '-100%'
             animateChild()
           ])),
           query(':enter', group([
@@ -42,7 +42,6 @@ import {trigger, animate, wait, style, group, query, animateChild, queryAll, sta
         ]),
 
         query(':leave', [
-          query('@image', animateChild()),
           queryAll('.image', [
             stagger(50, [
               animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translateY(-50px)' }))

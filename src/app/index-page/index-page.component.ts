@@ -1,4 +1,4 @@
-import {queryAll, stagger, wait, animate, style, transition, trigger} from '@angular/animations';
+import {queryAll, stagger, animate, style, transition, trigger} from '@angular/animations';
 import { Component, HostBinding } from '@angular/core';
 import {GroupsService} from "../groups.service";
 
