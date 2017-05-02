@@ -1,5 +1,5 @@
 import {HostBinding, Component, Input, Output, EventEmitter} from '@angular/core';
-import {trigger, query, animate, style, transition, animateChild, group, queryAll, stagger} from '@angular/animations';
+import {trigger, animate, style, transition, animateChild, group, query, stagger} from '@angular/animations';
 import {PreviewBusService} from "../preview-bus.service";
 
 @Component({
@@ -11,11 +11,11 @@ import {PreviewBusService} from "../preview-bus.service";
       transition(':enter', [
         style({ overflow: 'hidden', height: 0 }),
         query('.image-container', [
-          queryAll('*', style({ opacity: 0 }))
+          query('*', style({ opacity: 0 }))
         ]),
         group([
           animate('0.5s cubic-bezier(0.35, 0, 0.25, 1)', style({ height: '*' })),
-          queryAll('.image-container *', [
+          query('.image-container *', [
             stagger(100, animate(500, style({ opacity: 1 })))
           ])
         ])
@@ -25,7 +25,7 @@ import {PreviewBusService} from "../preview-bus.service";
         animate('0.5s cubic-bezier(0.35, 0, 0.25, 1)', style({ height: '0px'}))
       ]),
       transition('* => *', [
-        queryAll(':enter, :leave', style({ position: 'absolute', left: '0%' })),
+        query(':enter, :leave', style({ position: 'absolute', left: '0%' })),
         query(':enter', style({ left: '100%' })),
 
         group([
@@ -43,7 +43,7 @@ import {PreviewBusService} from "../preview-bus.service";
     ]),
     trigger('image', [
       transition(':enter', [
-        queryAll('*', [
+        query('*', [
           style({ transform: 'translateX(200px)', opacity: 0 }),
           stagger(100, [
             animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style('*'))

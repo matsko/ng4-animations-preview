@@ -1,4 +1,4 @@
-import {queryAll, stagger, animate, style, transition, trigger} from '@angular/animations';
+import {query, stagger, animate, style, transition, trigger} from '@angular/animations';
 import { Component, HostBinding } from '@angular/core';
 import {GroupsService} from "../groups.service";
 
@@ -9,10 +9,10 @@ import {GroupsService} from "../groups.service";
   animations: [
     trigger('pageAnimation', [
       transition(':enter', [
-        queryAll('.group .image, .group .upload-area', style({ transform: 'translateY(-50px)', opacity: 0})),
-        queryAll('.group', [
+        query('.group .image, .group .upload-area', style({ transform: 'translateY(-50px)', opacity: 0})),
+        query('.group', [
           stagger(300, [
-            queryAll('.image, .upload-area', [
+            query('.image, .upload-area', [
               stagger(100, [
                 animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
               ])

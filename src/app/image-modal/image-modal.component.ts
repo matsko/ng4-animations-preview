@@ -7,8 +7,8 @@ import {LoaderComponent} from '../loader/loader.component';
 import {PreviewBusService} from "../preview-bus.service";
 import {Subscription} from 'rxjs';
 
-const zoomFadeIn = {opacity: 0, transform: 'translateX($x) translateY($y) scale(0)'};
-const zoomFadeInFrom = {...zoomFadeIn, transformOrigin: '$ox $oy'};
+const zoomFadeIn = {opacity: 0, transform: 'translateX({{ x }}) translateY({{ y }}) scale(0)'};
+const zoomFadeInFrom = {...zoomFadeIn, transformOrigin: '{{ ox }} {{ oy }}'};
 const easeInFor = (duration) => `${duration}ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
 @Component({
@@ -24,13 +24,13 @@ const easeInFor = (duration) => `${duration}ms cubic-bezier(0.35, 0, 0.25, 1)`;
           animate(easeInFor(100), style({opacity: 1})),
           query('.container', animate(easeInFor(300), style('*'))),
         ]),
-      ], {x: '0px', y: '0px', ox: '50%', oy: '50%'}),
+      ], { params: {x: '0px', y: '0px', ox: '50%', oy: '50%'}}),
       transition(':leave', group([
         animate(300, style({opacity: 0})),
         query('.container', [
           animate(300, style(zoomFadeIn))
         ])
-      ]), {x: '0px', y: '0px', ox: '50%', oy: '50%'})
+      ]), { params: {x: '0px', y: '0px', ox: '50%', oy: '50%'}})
     ])
   ],
   encapsulation: ViewEncapsulation.None
@@ -41,6 +41,17 @@ export class ImageModalComponent {
 
   @ViewChild(LoaderComponent)
   public loader;
+  public _selectedGroup = '_newGroup';
+  public file;
+  public data = {
+    value: 'inactive',
+    params: {
+      x: null,
+      y: null,
+      ox: null,
+      oy: null
+    }
+  };
 
   constructor(public groups: GroupsService, private _preview: PreviewBusService) { }
 
@@ -74,10 +85,10 @@ export class ImageModalComponent {
     const ox = clientX / window.width;
     const oy = clientY / window.height;
 
-    this.data.x = `${x}px`;
-    this.data.y = `${y}px`;
-    this.data.ox = `${ox * 100}%`;
-    this.data.oy = `${oy * 100}%`;
+    this.data.params.x = `${x}px`;
+    this.data.params.y = `${y}px`;
+    this.data.params.ox = `${ox * 100}%`;
+    this.data.params.oy = `${oy * 100}%`;
   }
 
   private makeVisible() {
@@ -101,8 +112,8 @@ export class ImageModalComponent {
    * and select/show the uploaded image in the Image group.
    */
   save(form) {
-    let subscription:Subscription;
-    let showUploadedImage = (result) => {
+    let subscription: Subscription;
+    const showUploadedImage = (result) => {
       const id = this.groups.addImage(form.newGroup || form.group, result);
       this.hide();
       this._preview.openImageById(id);
@@ -122,17 +133,4 @@ export class ImageModalComponent {
   onFileChange(event) {
     this.file = event.target.files[0];
   }
-
-
-  _selectedGroup = '_newGroup';
-  file;
-  data = {
-    value: 'inactive',
-    x: null,
-    y: null,
-    ox: null,
-    oy: null
-  };
-
-
 }

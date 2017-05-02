@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ModalServiceService} from "./modal-service.service";
-import {trigger, animate, style, group, query, animateChild, queryAll, stagger, transition} from '@angular/animations';
+import {trigger, animate, style, group, animateChild, query, stagger, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import {trigger, animate, style, group, query, animateChild, queryAll, stagger, 
     trigger('routerAnimations', [
       transition('about => home', [
         group([
-          queryAll(':enter, :leave', [
+          query(':enter, :leave', [
             style({ position: 'absolute', top: 0, left: 0, right: 0 })
           ]),
           query(':leave', style({ zIndex: 100 })),
@@ -30,19 +30,19 @@ import {trigger, animate, style, group, query, animateChild, queryAll, stagger, 
       ]),
       transition('home => about', [
         group([
-          queryAll(':enter, :leave', [
+          query(':enter, :leave', [
             style({ position: 'absolute', top: 0, left: 0, right: 0 })
           ]),
           query(':enter', [
             style({ opacity:0, transform: 'translateX(100%)'}),
-            queryAll('contributor', [
+            query('contributor', [
               style({ opacity:0, transform: 'scale(0)'})
             ])
           ])
         ]),
 
         query(':leave', [
-          queryAll('.image', [
+          query('.image', [
             stagger(50, [
               animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translateY(-50px)' }))
             ])
@@ -54,7 +54,7 @@ import {trigger, animate, style, group, query, animateChild, queryAll, stagger, 
           query(':enter', [
             animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
           ]),
-          queryAll(':enter contributor', [
+          query(':enter contributor', [
             stagger(200, [
               animate('800ms cubic-bezier(.35,0,.25,1)', style('*'))
             ])
@@ -75,7 +75,10 @@ export class AppComponent {
   }
 
   prepareRouteTransition(outlet) {
-    const animationData = outlet.activeRouteData['animation'];
-    return animationData ? animationData['value'] : null;
+    if (outlet && outlet.activatedRoute) {
+      const animationData = outlet.activatedRoute.snapshot.data['animation'];
+      return animationData ? animationData['value'] : null;
+    }
+    return null;
   }
 }

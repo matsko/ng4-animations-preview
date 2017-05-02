@@ -46,8 +46,8 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
         transform: 'rotateY(180deg)',
       })),
       transition('back <=> front', [
-        animate('$time')
-      ], { time: '500ms' })
+        animate('{{ time }}')
+      ], { params: { time: '500ms' } })
     ])
   ]
 })
