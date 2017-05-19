@@ -75,10 +75,7 @@ export class AppComponent {
   }
 
   prepareRouteTransition(outlet) {
-    if (outlet && outlet.activatedRoute) {
-      const animationData = outlet.activatedRoute.snapshot.data['animation'];
-      return animationData ? animationData['value'] : null;
-    }
-    return null;
+    const animation = outlet.activatedRouteData['animation'] || {};
+    return animation['value'] || null;
   }
 }
