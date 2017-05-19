@@ -16,7 +16,7 @@
     "@angular/common": "4.2.0-rc.0",
     "@angular/compiler": "4.2.0-rc.0",
     "@angular/core": "4.2.0-rc.0",
-    "@angular/flex-layout": "4.2.0-rc.0",
+    "@angular/flex-layout": "latest",
     "@angular/forms": "4.2.0-rc.0",
     "@angular/http": "4.2.0-rc.0",
     "@angular/platform-browser": "4.2.0-rc.0",
