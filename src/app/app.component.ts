@@ -10,13 +10,10 @@ import {trigger, animate, style, group, animateChild, query, stagger, transition
   animations: [
     trigger('routerAnimations', [
       transition('about => home', [
-        group([
-          query(':enter, :leave', [
-            style({ position: 'absolute', top: 0, left: 0, right: 0 })
-          ]),
-          query(':leave', style({ zIndex: 100 })),
-          query(':enter', style({ transform: 'translateY(100%)' }))
-        ]),
+        query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
+        query(':leave', style({ zIndex: 100 })),
+        query(':enter', style({ transform: 'translateY(100%)' })),
+
         group([
           query(':leave', group([
             animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translateY(-100%)' })), // y: '-100%'
@@ -29,15 +26,12 @@ import {trigger, animate, style, group, animateChild, query, stagger, transition
         ])
       ]),
       transition('home => about', [
-        group([
-          query(':enter, :leave', [
-            style({ position: 'absolute', top: 0, left: 0, right: 0 })
-          ]),
-          query(':enter', [
-            style({ opacity:0, transform: 'translateX(100%)'}),
-            query('contributor', [
-              style({ opacity:0, transform: 'scale(0)'})
-            ])
+        query(':enter, :leave',
+          style({ position: 'absolute', top: 0, left: 0, right: 0 })),
+        query(':enter', [
+          style({ opacity:0, transform: 'translateX(100%)'}),
+          query('contributor', [
+            style({ opacity:0, transform: 'scale(0)'})
           ])
         ]),
 
